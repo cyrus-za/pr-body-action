@@ -5,9 +5,10 @@ try {
   const { context } = github;
   const githubToken = core.getInput("GITHUB_TOKEN");
   const body = core.getInput("body");
+  const prNumber = core.getInput("prNumber");
 
-  if (context.payload.pull_request == null) {
-    core.setFailed("No pull request found");
+  if (!prNumber) {
+    core.setFailed("prNumber input is required");
     return;
   }
   if (!githubToken) {
@@ -19,7 +20,6 @@ try {
     return;
   }
 
-  const { number: prNumber } = context.payload.pull_request;
   const octokit = new github.GitHub(githubToken);
   octokit.pulls.update({
     ...context.repo,
