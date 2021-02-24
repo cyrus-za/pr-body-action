@@ -1,6 +1,9 @@
 name: "Update PR body"
 description: "Update PR body because PR comments are annoying :)"
 inputs:
+  prNumber:
+    description: "prNumber"
+    required: true
   body:
     description: "body"
     required: true
